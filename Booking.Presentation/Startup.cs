@@ -11,6 +11,17 @@ using System.Reflection;
 
 using Booking.Persistence;
 
+using Booking.Application.Room.Queries.GetRoomDetail;
+using Booking.Application.Room.Queries.GetRoomList;
+using Booking.Application.Room.Commands.CreateRoom;
+using Booking.Application.Room.Commands.UpdateRoom;
+using Booking.Application.Room.Commands.DeleteRoom;
+
+using Booking.Application.RoomRental.Queries.GetRoomRentalDetail;
+using Booking.Application.RoomRental.Queries.GetRoomRentalList;
+using Booking.Application.RoomRental.Commands.CreateRoomRental;
+using Booking.Application.RoomRental.Commands.UpdateRoomRental;
+using Booking.Application.RoomRental.Commands.DeleteRoomRental;
 
 namespace Booking.Presentation
 {
@@ -53,9 +64,16 @@ namespace Booking.Presentation
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/Home/Error");
             }
 
+            // need to resolve handling of SwaggerUiSettings because it becomes generic now
+            //app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, new SwaggerUiSettings           
+            //{
+            //    DefaultUrlTemplate = "{controller}/{action}/{id?}"
+            //});
+
+           
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
