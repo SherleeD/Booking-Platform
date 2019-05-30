@@ -17,11 +17,11 @@ They cannot be able to book a room on a date that has already been booked or doe
 
 Reasoning behind my technical choices, including architectural.
 This is a Single Page Application with ASP.Net Core 2.0
-Microsoft Visual Studio Community 2017 Version 15.9.5
-Target Framework - .Net Core 2.2
-Entity Framework Core
-Angular CLI version 6
-MS SQL Express v17.9.1
+- Microsoft Visual Studio Community 2017 Version 15.9.5
+- Target Framework - .Net Core 2.2
+- Entity Framework Core
+- Angular CLI version 6
+- MS SQL Server Express v14
 
 I used CQRS(Command and Query Responsibility Segregation) Pattern to maximize performance, scalability and security. It can also support the evolution of the system over time through higher flexibility. It can also prevent update commands from causing merge conflicts at the domain level.
 
