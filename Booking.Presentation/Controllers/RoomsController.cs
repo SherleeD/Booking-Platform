@@ -45,7 +45,7 @@ namespace Booking.Presentation.Controllers
         }
 
         // GET: api/Rooms
-        [HttpGet]
+        [HttpGet("[action]")]
         [ProducesResponseType(typeof(IEnumerable<RoomListModel>), (int)HttpStatusCode.OK)]        
         public async Task<IActionResult> GetRooms()
         {
@@ -54,8 +54,7 @@ namespace Booking.Presentation.Controllers
 
         // GET: api/Rooms/5
         [HttpGet("{id}")]
-        [ValidateRoomExists]        
-        public async Task<IActionResult> GetRoom([FromRoute] string id)
+        public async Task<IActionResult> GetRoom(string id)
         {            
             return Ok(await _getRoomDetailQuery.Execute(id));
         }
@@ -63,7 +62,7 @@ namespace Booking.Presentation.Controllers
         // PUT: api/Rooms/5
         [HttpPut("{id}")]
         [ValidateModel, ValidateRoomExists]
-        public async Task<IActionResult> PutRoom([FromRoute] string id, [FromBody] UpdateRoomModel room)
+        public async Task<IActionResult> PutRoom(string id, [FromBody] UpdateRoomModel room)
         {           
             await _updateRoomCommand.Execute(room);
 

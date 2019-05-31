@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Application.Room.Commands.UpdateRoom
 {
-    public class UpdateRoomCommand
+    public class UpdateRoomCommand : IUpdateRoomCommand
     {
         public readonly BookingContext _context;
 

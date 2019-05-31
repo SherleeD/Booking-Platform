@@ -40,13 +40,25 @@ namespace Booking.Presentation
             services.AddDbContext<BookingContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("BookingConnectionString")));
 
+            services.AddScoped<IGetRoomDetailQuery, GetRoomDetailQuery>();
+            services.AddScoped<IGetRoomListQuery, GetRoomListQuery>();
+            services.AddScoped<ICreateRoomCommand, CreateRoomCommand>();            
+            services.AddScoped<IDeleteRoomCommand, DeleteRoomCommand>();
+            services.AddScoped<IUpdateRoomCommand, UpdateRoomCommand>();
+
+            services.AddScoped<IGetRoomRentalDetailQuery, GetRoomRentalDetailQuery>();
+            services.AddScoped<IGetRoomRentalListQuery, GetRoomRentalListQuery>();
+            services.AddScoped<ICreateRoomRentalCommand, CreateRoomRentalCommand>();
+            services.AddScoped<IDeleteRoomRentalCommand, DeleteRoomRentalCommand>();
+            services.AddScoped<IUpdateRoomRentalCommand, UpdateRoomRentalCommand>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+            //services.AddSpaStaticFiles(configuration =>
+            //{
+            //    configuration.RootPath = "ClientApp/dist";
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,43 +77,37 @@ namespace Booking.Presentation
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
             }
-
-            // need to resolve handling of SwaggerUiSettings because it becomes generic now
-            //app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, new SwaggerUiSettings           
+            
+            //app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, new SwaggerUiSettings
             //{
             //    DefaultUrlTemplate = "{controller}/{action}/{id?}"
             //});
 
-           
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
 
-            app.UseMvc(routes =>
-            {
+            app.UseStaticFiles();
+            //app.UseSpaStaticFiles();
+
+            //app.UseMvc();
+            app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-
-
-                // routes.MapSpaFallbackRoute(
-                //     name: "spa-fallback",
-                //     defaults: new { controller = "Home", action = "Index" });
-
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
+            //app.UseSpa(spa =>
+            //{
+            //    // To learn more about options for serving an Angular SPA from ASP.NET Core,
+            //    // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "ClientApp";
+            //    spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseAngularCliServer(npmScript: "start");
+            //    }
+            //});
 
 
             //uncomment when I apply swagger
@@ -113,7 +119,6 @@ namespace Booking.Presentation
             //            defaults: new { controller = "Home", action = "Index" });
             //    })
             //);
-
 
             BookingInitializer.Initialize(context);
 

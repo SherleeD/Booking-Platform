@@ -16,7 +16,8 @@ namespace Booking.Application.RoomRental.Queries.GetRoomRentalDetail
 
         public async Task<RoomRentalDetailModel> Execute(string id)
         {
-            var entity = await _context.RoomRentals.FindAsync(id);
+            int roomRentalID = int.Parse(id);
+            var entity = await _context.RoomRentals.FindAsync(roomRentalID);
 
             if (entity == null)
                 return null;

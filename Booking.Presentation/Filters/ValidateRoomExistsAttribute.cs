@@ -26,8 +26,10 @@ namespace Booking.Presentation.Filters
                     var id = context.ActionArguments["id"] as string ;
 
                     if (id != null)
-                    {                        
-                        if (await _context.Rooms.AllAsync(r => r.RoomId.ToString()  !=  id))
+                    {
+                        int roomID = int.Parse(id);
+
+                        if (await _context.Rooms.AllAsync(r => r.RoomId != roomID))
                         {
                             context.Result = new NotFoundObjectResult(id);
 

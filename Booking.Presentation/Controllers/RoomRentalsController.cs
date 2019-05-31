@@ -45,7 +45,7 @@ namespace Booking.Presentation.Controllers
         }
 
         // GET: api/RoomRentals
-        [HttpGet]
+        [HttpGet("[action]")]
         [ProducesResponseType(typeof(IEnumerable<RoomRentalListModel>), (int)HttpStatusCode.OK)]
         //public async Task<ActionResult<IEnumerable<RoomRental>>> GetRoomRentals()
         //{
