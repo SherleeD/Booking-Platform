@@ -22,7 +22,7 @@ namespace Booking.Application.Room.Commands.CreateRoom
         [MaxLength(40)]
         public string Address { get; set; }
 
-        public short? Capacity { get; set; }
+        public int Capacity { get; set; }
         public bool? Status { get; set; }
     }
 }

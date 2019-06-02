@@ -9,7 +9,7 @@ namespace Booking.Domain
     {
         public RoomRental()
         {
-
+           
         }
 
         [Column("RoomRentalID")]
@@ -33,9 +33,9 @@ namespace Booking.Domain
         public DateTime? DateTo { get; set; }
 
         [Required]
-        public short? NumberOfPerson { get; set; }
+        public int NumberOfPerson { get; set; }
 
         [ForeignKey("RoomId")]        
-        public virtual Room Room { get; set; }
+        public virtual Room Rooms{ get; set; }
     }
 }

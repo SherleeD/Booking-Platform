@@ -28,24 +28,25 @@ namespace Booking.Presentation.Controllers
         private readonly IGetRoomDetailQuery _getRoomDetailQuery;
         private readonly ICreateRoomCommand _createRoomCommand;
         private readonly IUpdateRoomCommand _updateRoomCommand;
-        private readonly IDeleteRoomCommand _deleteRoomCommand;       
+        //private readonly IDeleteRoomCommand _deleteRoomCommand;       
 
         public RoomsController(
         IGetRoomListQuery getRoomListQuery,
         IGetRoomDetailQuery getRoomDetailQuery,
         ICreateRoomCommand createRoomCommand,
-        IUpdateRoomCommand updateRoomCommand,
-        IDeleteRoomCommand deleteRoomCommand)
+        IUpdateRoomCommand updateRoomCommand
+        //IDeleteRoomCommand deleteRoomCommand
+            )
         {
             _getRoomListQuery = getRoomListQuery;
             _getRoomDetailQuery = getRoomDetailQuery;
             _createRoomCommand = createRoomCommand;
             _updateRoomCommand = updateRoomCommand;
-            _deleteRoomCommand = deleteRoomCommand;
+            //_deleteRoomCommand = deleteRoomCommand;
         }
 
         // GET: api/Rooms
-        [HttpGet("[action]")]
+        [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<RoomListModel>), (int)HttpStatusCode.OK)]        
         public async Task<IActionResult> GetRooms()
         {
@@ -54,7 +55,9 @@ namespace Booking.Presentation.Controllers
 
         // GET: api/Rooms/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetRoom(string id)
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(RoomDetailModel), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetRoom(int id)
         {            
             return Ok(await _getRoomDetailQuery.Execute(id));
         }
@@ -62,7 +65,9 @@ namespace Booking.Presentation.Controllers
         // PUT: api/Rooms/5
         [HttpPut("{id}")]
         [ValidateModel, ValidateRoomExists]
-        public async Task<IActionResult> PutRoom(string id, [FromBody] UpdateRoomModel room)
+        [ProducesResponseType(typeof(IDictionary<string, string>), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> PutRoom([FromBody] UpdateRoomModel room)
         {           
             await _updateRoomCommand.Execute(room);
 
@@ -72,6 +77,8 @@ namespace Booking.Presentation.Controllers
         // POST: api/Rooms
         [HttpPost]
         [ValidateModel]
+        [ProducesResponseType(typeof(IDictionary<string, string>), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(CreateRoomModel), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> PostRoom([FromBody] CreateRoomModel room)
         {           
             await _createRoomCommand.Execute(room);
@@ -79,15 +86,16 @@ namespace Booking.Presentation.Controllers
             return CreatedAtAction("GetRoom", new { id = room.RoomId }, room);
         }
 
+        
         // DELETE: api/Rooms/5
-        [HttpDelete("{id}")]
-        [ValidateRoomExists]        
-        public async Task<IActionResult> DeleteRoom([FromRoute] string id)
-        {
-            await _deleteRoomCommand.Execute(id);
+        //[HttpDelete("{id}")]
+        //[ValidateRoomExists]        
+        //public async Task<IActionResult> DeleteRoom(string id)
+        //{
+        //    await _deleteRoomCommand.Execute(id);
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
         
     }
 }

@@ -14,10 +14,10 @@ namespace Booking.Application.Room.Queries.GetRoomDetail
             _context = context;
         }
 
-        public async Task<RoomDetailModel> Execute(string id)
+        public async Task<RoomDetailModel> Execute(int id)
         {
-            int roomID = int.Parse(id);
-            var entity = await _context.Rooms.FindAsync(roomID);
+            //int roomID = int.Parse(id);
+            var entity = await _context.Rooms.FindAsync(id);
 
             if (entity == null)
                 return null;

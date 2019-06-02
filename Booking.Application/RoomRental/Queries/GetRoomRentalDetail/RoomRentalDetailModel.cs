@@ -12,6 +12,6 @@ namespace Booking.Application.RoomRental.Queries.GetRoomRentalDetail
         public string TenantName { get; set; }
         public DateTime? DateFrom { get; set; }
         public DateTime? DateTo { get; set; }
-        public short? NumberOfPerson { get; set; }
+        public int NumberOfPerson { get; set; }
     }
 }

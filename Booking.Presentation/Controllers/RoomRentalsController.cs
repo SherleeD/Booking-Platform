@@ -21,9 +21,10 @@ using Booking.Presentation.Filters;
 namespace Booking.Presentation.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]    
-    public class RoomRentalsController : Controller 
+    [Route("api/[controller]")]
+    public class RoomRentalsController : Controller
     {
+
         private readonly IGetRoomRentalListQuery _getRoomRentalListQuery;
         private readonly IGetRoomRentalDetailQuery _getRoomRentalDetailQuery;
         private readonly ICreateRoomRentalCommand _createRoomRentalCommand;
@@ -45,22 +46,17 @@ namespace Booking.Presentation.Controllers
         }
 
         // GET: api/RoomRentals
-        [HttpGet("[action]")]
+        [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<RoomRentalListModel>), (int)HttpStatusCode.OK)]
-        //public async Task<ActionResult<IEnumerable<RoomRental>>> GetRoomRentals()
-        //{
-        //    return await _context.RoomRentals.ToListAsync();
-        //}
-
         public async Task<IActionResult> GetRoomRentals()
         {
             return Ok(await _getRoomRentalListQuery.Execute());
         }
 
         // GET: api/RoomRentals/5
-        [HttpGet("{id}")]       
+        [HttpGet("{id}")]
         [ValidateRoomExists]
-        public async Task<IActionResult> GetRoomRental([FromRoute] string id)
+        public async Task<IActionResult> GetRoomRental(int id)
         {
             return Ok(await _getRoomRentalDetailQuery.Execute(id));
         }
@@ -68,31 +64,32 @@ namespace Booking.Presentation.Controllers
         // PUT: api/RoomRentals/5
         [HttpPut("{id}")]
         [ValidateModel, ValidateRoomExists]
-        public async Task<IActionResult> PutRoomRental([FromRoute] string id, [FromBody] UpdateRoomRentalModel roomRental)
+        public async Task<IActionResult> PutRoomRental([FromBody] UpdateRoomRentalModel roomRental)
         {
             await _updateRoomRentalCommand.Execute(roomRental);
 
             return NoContent();
-        }       
+        }
 
         // POST: api/RoomRentals
         [HttpPost]
         [ValidateModel]
         public async Task<IActionResult> PostRoomRental([FromBody] CreateRoomRentalModel roomRental)
-        {
+        {               
             await _createRoomRentalCommand.Execute(roomRental);
 
             return CreatedAtAction("GetRoomRental", new { id = roomRental.RoomRentalID }, roomRental);
-        }       
+
+        }
 
         // DELETE: api/RoomRentals/5
-        [HttpDelete("{id}")]
-        [ValidateRoomExists]
-        public async Task<IActionResult> DeleteRoomRental([FromRoute] string id)
-        {
-            await _deleteRoomRentalCommand.Execute(id);
+        //[HttpDelete("{id}")]
+        //[ValidateRoomExists]
+        //public async Task<IActionResult> DeleteRoomRental(string id)
+        //{
+        //    await _deleteRoomRentalCommand.Execute(id);
 
-            return NoContent();
-        }       
+        //    return NoContent();
+        //}
     }
 }

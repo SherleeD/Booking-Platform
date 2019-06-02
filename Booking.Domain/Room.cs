@@ -8,10 +8,11 @@ namespace Booking.Domain
 {
     public partial class Room
     {
-        public Room()
-        {
-            RoomRentals = new HashSet<RoomRental>();
-        }
+        //public Room()
+        //{
+           
+        //    RoomRentals = new List<RoomRental>();
+        //}
 
         [Column("RoomID")]
         [Key]
@@ -37,9 +38,10 @@ namespace Booking.Domain
         [MaxLength(40)]
         public string Address { get; set; }
 
-        public short? Capacity { get; set; }
+        public int Capacity { get; set; }
         public bool? Status { get; set; }
         
-        public virtual ICollection<RoomRental> RoomRentals { get; set; }
+        //public virtual ICollection<RoomRental> RoomRentals { get; set; }
+        
     }
 }

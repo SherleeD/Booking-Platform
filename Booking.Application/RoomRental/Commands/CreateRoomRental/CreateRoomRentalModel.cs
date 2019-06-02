@@ -19,6 +19,6 @@ namespace Booking.Application.RoomRental.Commands.CreateRoomRental
 
         public DateTime? DateTo { get; set; }
 
-        public short? NumberOfPerson { get; set; }
+        public int NumberOfPerson { get; set; }
     }
 }

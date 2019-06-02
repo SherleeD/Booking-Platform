@@ -4,6 +4,6 @@ namespace Booking.Application.RoomRental.Queries.GetRoomRentalDetail
 {
     public interface IGetRoomRentalDetailQuery
     {
-        Task<RoomRentalDetailModel> Execute(string id);
+        Task<RoomRentalDetailModel> Execute(int id);
     }
 }

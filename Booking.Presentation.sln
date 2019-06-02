@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booking.Domain", "Booking.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booking.Application", "Booking.Application\Booking.Application.csproj", "{8810F254-5E90-4998-962C-5422F0C38911}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Test", "Booking.Test\Booking.Test.csproj", "{F6ACF98B-3C65-474B-B546-886A1976AC77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booking.Test", "Booking.Test\Booking.Test.csproj", "{F6ACF98B-3C65-474B-B546-886A1976AC77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

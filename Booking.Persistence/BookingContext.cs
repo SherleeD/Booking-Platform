@@ -4,7 +4,7 @@ using Booking.Domain;
 
 namespace Booking.Persistence
 {
-    public partial class BookingContext : DbContext 
+    public class BookingContext : DbContext 
     {
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomRental> RoomRentals { get; set; }
