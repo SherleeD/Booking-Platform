@@ -7,27 +7,31 @@ using Booking.Application;
 using Booking.Domain;
 using Booking.Presentation;
 using Booking.Presentation.Filters;
+using Booking.Persistence;
 
 namespace Booking.Test
 {
     [TestFixture]
     public class BookingUnitTest
     {
+        public readonly BookingContext _context;
+
         [Test]
         public void ReturnAvailableRooms()
-        {
-            //Test availability of the room based on capacity and date range specified
+        {           
 
-            //Arrange
+        //Test availability of the room based on capacity and date range specified
 
-            //var bookingServiceMock = new Mock<Application.Room.Queries.GetRoomList.IGetRoomListQuery>();
+        //Arrange
 
-            var controller = new ValidateBookedRoom();
-            int roomID = 1;
-            int numberofPersons = 2;
-            var result = controller.IsValidRoomCapacity(roomID, numberofPersons);
+        //var bookingServiceMock = new Mock<Application.Room.Queries.GetRoomList.IGetRoomListQuery>();
 
-            Assert.IsTrue(result);
+        //var controller = new ValidateBookedRoom();
+        //int roomID = 1;
+        //int numberofPersons = 2;
+        //var result = controller.IsValidRoomCapacity(roomID, numberofPersons);
+
+        //Assert.IsTrue(result);
 
 
         }

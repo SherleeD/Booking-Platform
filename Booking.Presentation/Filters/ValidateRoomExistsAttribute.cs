@@ -24,6 +24,7 @@ namespace Booking.Presentation.Filters
                 if (context.ActionArguments.ContainsKey("id"))
                 {
                     var id = context.ActionArguments["id"] as string ;
+                     
 
                     if (id != null)
                     {

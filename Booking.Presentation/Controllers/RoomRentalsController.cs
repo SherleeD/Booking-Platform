@@ -12,6 +12,7 @@ using Booking.Application.RoomRental.Commands.DeleteRoomRental;
 using Booking.Application.RoomRental.Commands.UpdateRoomRental;
 using Booking.Application.RoomRental.Queries.GetRoomRentalDetail;
 using Booking.Application.RoomRental.Queries.GetRoomRentalList;
+using Booking.Application.RoomRental.Queries.GetAvailableRoom;
 
 using Booking.Domain;
 using Booking.Persistence;
@@ -30,19 +31,22 @@ namespace Booking.Presentation.Controllers
         private readonly ICreateRoomRentalCommand _createRoomRentalCommand;
         private readonly IUpdateRoomRentalCommand _updateRoomRentalCommand;
         private readonly IDeleteRoomRentalCommand _deleteRoomRentalCommand;
+        private readonly IGetAvailableRoomListQuery _getAvailableRoomListQuery;
 
         public RoomRentalsController(
         IGetRoomRentalListQuery getRoomRentalListQuery,
         IGetRoomRentalDetailQuery getRoomRentalDetailQuery,
         ICreateRoomRentalCommand createRoomRentalCommand,
         IUpdateRoomRentalCommand updateRoomRentalCommand,
-        IDeleteRoomRentalCommand deleteRoomRentalCommand)
+        IDeleteRoomRentalCommand deleteRoomRentalCommand,
+        IGetAvailableRoomListQuery getAvailableRoomListQuery)
         {
             _getRoomRentalListQuery = getRoomRentalListQuery;
             _getRoomRentalDetailQuery = getRoomRentalDetailQuery;
             _createRoomRentalCommand = createRoomRentalCommand;
             _updateRoomRentalCommand = updateRoomRentalCommand;
             _deleteRoomRentalCommand = deleteRoomRentalCommand;
+            _getAvailableRoomListQuery = getAvailableRoomListQuery;
         }
 
         // GET: api/RoomRentals
@@ -52,6 +56,15 @@ namespace Booking.Presentation.Controllers
         {
             return Ok(await _getRoomRentalListQuery.Execute());
         }
+
+
+        [HttpPost]
+        [ProducesResponseType(typeof(IEnumerable<AvailableRoomListViewModel>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetAvailableRooms([FromBody] AvailableRoomListViewModel availableRoom)
+        {
+            return Ok(await _getAvailableRoomListQuery.Execute());
+        }
+
 
         // GET: api/RoomRentals/5
         [HttpGet("{id}")]
@@ -64,7 +77,7 @@ namespace Booking.Presentation.Controllers
         // PUT: api/RoomRentals/5
         [HttpPut("{id}")]
         [ValidateModel, ValidateRoomExists]
-        public async Task<IActionResult> PutRoomRental([FromBody] UpdateRoomRentalModel roomRental)
+        public async Task<IActionResult> PutRoomRentals([FromBody] UpdateRoomRentalModel roomRental)
         {
             await _updateRoomRentalCommand.Execute(roomRental);
 
@@ -72,9 +85,9 @@ namespace Booking.Presentation.Controllers
         }
 
         // POST: api/RoomRentals
-        [HttpPost]
-        [ValidateModel]
-        public async Task<IActionResult> PostRoomRental([FromBody] CreateRoomRentalModel roomRental)
+        [HttpPost("{action}")]
+        [ValidateModel, ValidateRoomRentalInput]
+        public async Task<IActionResult> AvailRoomRentals([FromBody] CreateRoomRentalModel roomRental)
         {               
             await _createRoomRentalCommand.Execute(roomRental);
 

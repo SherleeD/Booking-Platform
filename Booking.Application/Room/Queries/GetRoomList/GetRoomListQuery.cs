@@ -17,7 +17,7 @@ namespace Booking.Application.Room.Queries.GetRoomList
 
         public async Task<IEnumerable<RoomListModel>> Execute()
         {
-            return await _context.Rooms.Select(r =>
+            return await _context.Rooms.Select(r => 
                 new RoomListModel
                 {
                     RoomId = r.RoomId,

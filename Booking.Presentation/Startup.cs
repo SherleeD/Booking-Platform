@@ -22,6 +22,8 @@ using Booking.Application.RoomRental.Queries.GetRoomRentalList;
 using Booking.Application.RoomRental.Commands.CreateRoomRental;
 using Booking.Application.RoomRental.Commands.UpdateRoomRental;
 using Booking.Application.RoomRental.Commands.DeleteRoomRental;
+using Booking.Application.RoomRental.Queries.GetAvailableRoom;
+
 
 namespace Booking.Presentation
 {
@@ -51,6 +53,7 @@ namespace Booking.Presentation
             services.AddScoped<ICreateRoomRentalCommand, CreateRoomRentalCommand>();
             services.AddScoped<IDeleteRoomRentalCommand, DeleteRoomRentalCommand>();
             services.AddScoped<IUpdateRoomRentalCommand, UpdateRoomRentalCommand>();
+            services.AddScoped<IGetAvailableRoomListQuery, GetAvailableRoomListQuery>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

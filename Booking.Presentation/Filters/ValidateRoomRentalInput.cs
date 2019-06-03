@@ -10,10 +10,20 @@ namespace Booking.Presentation.Filters
     {
         public ValidateRoomRentalInput() : base(typeof(ValidateRoomRentalInputFilterImpl)) { }
 
-        private class ValidateRoomRentalInputFilterImpl
+        private class ValidateRoomRentalInputFilterImpl : IAsyncActionFilter
         {
-            
+            private readonly BookingContext _dbcontext;
 
+            public ValidateRoomRentalInputFilterImpl(BookingContext context)
+            {
+                _dbcontext = context;
+            }
+
+            public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+            {
+                var test = context.ActionArguments.ToString();
+                await next();
+            }
         }
 
     }
