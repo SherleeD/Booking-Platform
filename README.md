@@ -22,6 +22,7 @@ This is a Single Page Application with ASP.Net Core 2.0
 - Entity Framework Core
 - Angular CLI version 6
 - MS SQL Server Express v14
+- NodeJs latest version available
 
 I used CQRS(Command and Query Responsibility Segregation) Pattern to maximize performance, scalability and security. It can also support the evolution of the system over time through higher flexibility. It can also prevent update commands from causing merge conflicts at the domain level.
 
@@ -35,6 +36,7 @@ I got an issue with SwaggerUiSettings but if I still got time I would like to re
 I still need to create filters for validating the inputted data for the selected room.
 If I still have time I would like to create the unit test too to use TDD process
 
+I'm trying to avoid the so called fat controllers in web API that's why I created another class in my filter folder but I struggle on how I can get the values I got after the action.
 
 
 Angular CLI Level : Beginner
